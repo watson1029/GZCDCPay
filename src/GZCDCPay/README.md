@@ -3,7 +3,7 @@
 
 ## 安装调试
 1. 安装 dotnet [https://dotnet.github.io/](https://dotnet.github.io/)
-2. 下载源码 git clone https://github.com/watson1029/gzcdc-pay.git
+2. 下载源码 git clone https://github.com/watson1029/GZCDCPay.git
 3. 恢复依赖包 dotnet restore 
 4. 运行 dotnet run
 - - - 
