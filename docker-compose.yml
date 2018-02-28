@@ -1,0 +1,22 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.7
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        volumes:
+            - data:/var/lib/msql
+        environment:
+            MYSQL_ROOT_PASSWORD: 'password'
+        ports:
+            - 3306
+    web:
+        build: .
+        volumes:
+            - .:/code
+        ports:
+            - "5000:5000"
+        links:
+            - db:gzcdc_db
+volumes:
+    data:
+        driver: local

@@ -1,0 +1,82 @@
+
+body
+  margin 0 auto
+
+.header
+  padding-top 20px
+  padding-bottom 10px
+  border-bottom 3px solid #f0f0f0
+  position relative
+  .logo
+    height 50px
+    img
+      height 100%
+  .header-text
+    color #CCC
+    font-size 2em    
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+footer
+  border-top 1px solid #f0f0f0
+  text-align center
+  margin-top 20px
+  padding-top 20px
+  font-size 12px
+
+
+
+
+.wxpay-test-page {
+    padding-top: 20px;
+}
+
+.wxpay-test-page .logo {
+    height: 50px;
+}
+
+.wxpay-test-page .logo img {
+    height: 100%;
+}
+
+.wxpay-test-page .qrcode-placeholder{
+    margin-bottom: 10px
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  animation: rotate 1.4s infinite ease-in-out, background 1.4s infinite ease-in-out alternate;
+}
+
+@keyframes rotate {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+  }
+}
+@keyframes background {
+  0% {
+  background-color: #27ae60;
+  }
+  50% {
+    background-color: #9b59b6;
+  }
+  100% {
+    background-color: #c0392b;
+  }
+}
+
+@import payment
+@import wxpay

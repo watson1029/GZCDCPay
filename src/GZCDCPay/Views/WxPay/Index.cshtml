@@ -1,0 +1,77 @@
+
+
+<div class="wxpay-page" id="wxpay-page">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-2 qrcode-component">
+            <div class="logo">
+                <img src="~/images/wxpay.svg" height="50" alt="">
+            </div>
+                
+            <div class="qrcode-wrapper">
+                <input type="hidden" id="payment-url" value='@ViewBag.Url'>
+                <input type="hidden" id="inner-id" value='@ViewBag.Id'>
+                <div class="qrcode" id="qrcode"></div>
+            </div>
+            
+            <div class="status-wrapper">
+                <!-- ko ifnot: scanned -->
+                <div class="status waiting">
+                    <img src="~/images/wxpay/waiting_for_scan.png" alt="">
+                </div>
+                <!-- /ko -->
+                <!-- ko if: scanned -->
+                <div class="status scanned">
+                    <div class="status-content">
+                        <i class="glyphicon glyphicon-check"></i>
+                        <span>已完成扫描</span><br/>
+                        <span>请在手机上完成支付</span>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <img src="~/images/wxpay/weixin_bg.gif" alt="">
+        </div>
+    
+    </div>
+    
+    <div class="row">
+        
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/lib/qrcode.js/qrcode.js"></script>
+    <script type="text/javascript">
+
+    var url = document.getElementById("payment-url").value,
+        innerId = document.getElementById("inner-id").value;
+    var qrcode = new QRCode("qrcode",{
+            text: url,
+            width: 230,
+            height: 230,
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    var viewModel = {
+        scanned: ko.observable(false)
+    };    
+
+    var handle = setInterval(function(){
+        $.get("/WxPay/Status/"+innerId)
+            .then(function(data){
+                console.log(data);
+                if(data.status == 1) {
+                    viewModel.scanned(true);
+                } else if (data.status == 2) {
+                    clearInterval(handle);
+                    window.location.href = '/Result/'+innerId;
+                }
+            });
+    },3000);
+
+    ko.applyBindings(viewModel, document.getElementById("wxpay-page"));
+
+    </script>
+}

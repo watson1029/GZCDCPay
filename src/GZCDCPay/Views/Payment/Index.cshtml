@@ -1,0 +1,122 @@
+@model PaymentRequest
+
+@section AdditionalHeader
+{
+    <div class="payment-selection-page header-link">
+        <a href="#faq">支付遇到问题？</a>
+    </div>
+}
+
+<div class="payment-selection-page" id="payment-selection-page">
+    <div class="row">
+        <div class="order-details col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-6">
+        <dl>
+            <dt>缴款单位</dt><dd>@Model.ApplicantName</dd>
+            <dt>工单号</dt><dd>@Model.OrderId</dd>
+            <dt>商品名称</dt><dd>@Model.Description</dd>
+            <dt>应付金额</dt><dd class="price"><span class="currency">@(Model.Amount.Value/100).@((Model.Amount.Value%100).ToString("D2"))</span><span>元</span></dd>
+            <dt>说明</dt><dd>电子口岸业务卡、安全产品工本费由东方口岸科技有限公司委托广州海成科技有限公司代收。</dd>
+        </dl>
+        </div>
+        <div class="payment-selection col-lg-4 col-md-5 col-sm-6">
+        <h3>选择支付方式</h3>
+        <div class="payment-select">
+            <form target="_blank" method="POST" data-bind="submit: onSubmit, attr:{action: channelPath}">
+                <div class="form-group">
+                    <label for="wxpay" class="col-sm-10 col-sm-offset-1">
+                        <input type="radio" name="channel" value="WxPay" id="wxpay" checked data-bind="checked: selectedChannel" />
+                        <div class="radio">
+                            <img src="~/images/wxpay.svg" alt="" height="64" />
+                            <div class="tick">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </div>
+                        </div>
+                        
+                    </label>    
+                </div>
+                <div class="form-group">
+                    <label for="alipay" class="col-sm-10 col-sm-offset-1">
+                        <input type="radio" name="channel" value="Alipay" id="alipay" data-bind="checked: selectedChannel" disabled />
+                        <div class="radio">
+                            <img src="~/images/alipay.png" alt="" />
+                            <div class="tick" style="bottom: 0; color: #bbb; width: 60px">
+                                <!--<i class="glyphicon glyphicon-ok"></i>-->
+                                <span>即将开通</span>
+                            </div>
+                        </div>
+                        
+                    </label>
+                </div>
+                <input type="hidden" data-bind="value: innerId" name="id">
+                <div class="row">
+                    <button class="btn btn-pay col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">确认支付</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="faq col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12" id="faq">
+            <h4>支付相关的问题</h4>
+            <hr />
+            <h5>关于发票</h5>
+            <p>
+                用户支付成功后，发票将由东方口岸科技有限公司从北京统一寄送。寄送时间约为10-15个工作日。
+            </p>
+            <h5>如何退款</h5>
+            <p>
+                如因系统故障等原因导致用户重复支付，用户可以填写退款申请向广州海成科技有限公司申请退款。退款申请一经审核确认，代收公司将为用户办理退款。
+            </p>
+            <h5>支持的支付方式</h5>
+            <p>
+                系统目前暂时只支持微信支付，其它支付将在近期推出。
+            </p>
+            <h5>人工帮助</h5>
+            <p>
+                用户在支付过程中，如有问题可咨询热线电话：020-83939000-2。
+            </p>
+        </div>
+    </div>
+
+    <!-- Popup -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="confirm-modal">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">支付结果</h4>
+                </div>
+                <!--<div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bind="click: goToResult">已经完成支付</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">支付遇到问题?</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    function PaymentViewModel(){
+        var that=this;
+        this.innerId = ko.observable("@Model.Id");
+        this.selectedChannel = ko.observable("WxPay");
+        this.channelPath = ko.pureComputed(function(){
+            return "/" + that.selectedChannel();
+        });
+        this.onSubmit = function(){
+            $("#confirm-modal").modal({backdrop:'static'});
+            return true;
+        }
+        this.goToResult = function(){
+            window.location.href = "/Result/"+that.innerId();
+        }
+    }
+    ko.applyBindings(new PaymentViewModel(),document.getElementById("payment-selection-page"));
+</script>
+}

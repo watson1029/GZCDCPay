@@ -1,0 +1,119 @@
+.payment-selection-page
+  padding-top 20px
+  &>.row:nth-child(1)
+    border 1px solid #f0f0f0
+    padding 10px
+  
+  &.header-link
+    position absolute
+    right 10px
+    bottom 10px
+  .order-details
+    //border 3px solid #65bdf9
+    min-height 350px
+    padding 30px
+    background linear-gradient(#f4fff7, #e3fbe9)
+    border-radius 10px
+    dl
+      dt
+        padding-top: 10px
+        color #6fadd7
+        &:after
+          content: ":"
+      dd
+        padding-left 2em
+        &.price
+          text-align right
+        .currency
+          color #ff3b30
+          font-size 2em
+          font-weight: 500
+  .payment-selection
+    padding 0px 20px
+    h3
+      text-align center
+    .form-group
+      margin-top 10px
+      margin-bottom 10px
+      label
+        display block
+      input[type=radio]
+        display none
+      .radio
+        border 5px solid
+        border-radius 4px
+        border-style dotted
+        border-color #f0f0f0
+        padding 5px
+        position relative
+        overflow hidden
+        transition 0.2s linear all
+        .tick
+          position absolute
+          right 0
+          bottom -1.4em
+          width 1.4em
+          text-align center
+          color transparent
+          border-top-left-radius: 4px
+          transition 0.2s linear all
+
+      input[type=radio]:checked+div.radio
+        border-color #ff9500
+        border-style solid
+        .tick
+          background-color #ff9500
+          color white
+          bottom 0
+
+    .btn-pay
+      margin-top 20px
+      background linear-gradient(#ff9500, #ff5e3a)
+      color white
+      font-size 1.5em
+  .faq
+    margin-top 60px
+
+    h5,p
+      padding-left 30px
+
+    p
+      color #999
+
+  .modal 
+    text-align: center;
+
+  @media screen and (min-width: 768px) { 
+    .modal:before {
+      display: inline-block;
+      vertical-align: middle;
+      content: " ";
+      height: 100%;
+    }
+  }
+
+  .modal-dialog 
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    .modal-footer
+      text-align center
+
+.payment-result-page
+  padding-top 20px
+  &>.row:nth-child(1)
+    border 1px solid #f0f0f0
+    .placeholder
+      display flex
+      min-height: 400px
+      
+    .placeholder-left
+      justify-content: flex-end
+      align-items center
+    .placeholder-right
+      justify-content: center
+      align-items: flex-start
+      flex-direction: column
+  .logo
+    img
+      width 120px  

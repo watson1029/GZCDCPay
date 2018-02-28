@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+<style>
+path {fill:#b42828;}
+</style>
+<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+<g><path d="M500,10C227,10,10,227,10,500s217,490,490,490s490-217,490-490S773,10,500,10z M801,801c-84,84-189,126-301,126c-112,0-224-42-301-126S73,612,73,500c0-112,42-224,126-301c84-77,189-126,301-126c112,0,224,42,301,126s126,189,126,301C927,612,885,724,801,801z"/>
+<path d="M290,402c0,34.8,28.2,63,63,63c34.8,0,63-28.2,63-63c0-34.8-28.2-63-63-63C318.2,339,290,367.2,290,402L290,402z"/>
+<path d="M605,402c0,34.8,28.2,63,63,63c34.8,0,63-28.2,63-63c0-34.8-28.2-63-63-63C633.2,339,605,367.2,605,402L605,402z"/>
+<path d="M507,633c-98,0-182,42-231,112c0,0-7,21,7,35c14,14,42,14,42,14c7-14,21-28,35-42c42-35,91-49,147-49s112,21,147,49c14,14,21,21,35,35c0,0,21,0,35-7c14-14,14-28,14-28C689,675,605,633,507,633z"/></g>
+</svg>

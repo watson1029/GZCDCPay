@@ -1,0 +1,26 @@
+@model PaymentError
+
+<div class="payment-result-page" id="payment-result-page">
+    <div class="row">
+            <div class="col-lg-3 col-lg-offset-2 col-md-4 col-md-offset-1 col-sm-5 placeholder placeholder-left">
+                    <div class="logo fail">
+                        <img src="~/images/fail.svg" alt="">
+                    </div>
+            </div>
+            <div class="col-sm-7 placeholder placeholder-right">
+                <h4>@Model.Message</h4>
+                <a href="@Model.RedirectUrl" id="callback">点击此处继续</a>
+            </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var callbackUrl = document.getElementById("callback").href;
+        if(callbackUrl) {
+            setTimeout(function(){
+                window.location.href = callbackUrl;
+            },3000);
+        }
+    </script>
+}

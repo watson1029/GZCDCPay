@@ -1,0 +1,21 @@
+digraph payment_state_machine {
+    rankdir=TD;
+    //size="8,5";
+    node [shape = doublecircle]; Start End;
+    node [shape = circle];
+    Start -> CheckOrder 
+    [ label = "User: Place order" ];
+    CheckOrder -> Preparing [ label = "User: ε \n Server: Status == preparing" ];
+    CheckOrder -> WxPay_1 [ label = "User: ε \n Server: Status == wxpay" ];
+    CheckOrder -> Alipay [ label = "User: ε \n Server: Status == alipay" ];
+    CheckOrder -> Result [ label = "User: ε \n Server: Status == success" ];
+    Preparing -> WxPay_1 [ label = "User: select WxPay\n Server: close other order \n& Generate orderId" ];
+    WxPay_1 -> WxPay_2 [ label = "User: ε \n Server: place order" ];
+    WxPay_2 -> WxPay_3 [ label = "User: pay \n Server: ε"];
+    WxPay_2 -> WxPayResult [ label = "User: ε \n Server: catch exception" ];
+    Preparing -> Alipay [ label = "User: select Alipay\n Server: close other order" ];
+    WxPay_3 -> WxPayResult [ label = "User: ε \n Server: receive notification" ];
+    WxPayResult -> Result ;
+    Alipay -> Result [ label = "Alipay Redirect" ];
+    Result -> End [ label = "Redirect to CallbackUrl" ];
+}
